@@ -29,11 +29,14 @@ def generate(source: Path, dest: Path, placeholder: str, value: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("project_name", type=str)
-    project_name: str = parser.parse_args().project_name
+    parser.add_argument("--out-dir", type=Path, default=Path.home() / "code")
+    args = parser.parse_args()
+    project_name: str = args.project_name
+    out_dir: Path = args.out_dir
 
     generate(
         source=Path("template"),
-        dest=Path.home() / "code" / project_name,
+        dest=out_dir / project_name,
         placeholder="REPLACE_PROJECT_NAME",
         value=project_name,
     )
