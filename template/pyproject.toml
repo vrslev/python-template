@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "REPLACE_PROJECT_NAME"
+version = "0.0.1"
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [{ name = "Lev Vereshchagin", email = "mail@vrslev.com" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/unknown/REPLACE_PROJECT_NAME#readme"
+Issues = "https://github.com/unknown/REPLACE_PROJECT_NAME/issues"
+Source = "https://github.com/unknown/REPLACE_PROJECT_NAME"
+
+# [project.scripts]
+# REPLACE_PROJECT_NAME = "REPLACE_PROJECT_NAME.cli:main"
+
+[tool.hatch.envs.default]
+path = ".venv"
+dependencies = ["coverage[toml]>=6.5", "pytest"]
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = ["- coverage combine", "coverage report"]
+cov = ["test-cov", "cov-report"]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.types]
+dependencies = ["pyright"]
+[tool.hatch.envs.types.scripts]
+check = "pyright"
+
+[tool.hatch.format]
+config-path = "ruff_defaults.toml"
+
+[tool.ruff]
+extend = "ruff_defaults.toml"
+
+[tool.coverage.run]
+source_pkgs = ["REPLACE_PROJECT_NAME", "tests"]
+branch = true
+parallel = true
+
+[tool.coverage.paths]
+REPLACE_PROJECT_NAME = ["src/REPLACE_PROJECT_NAME", "*/REPLACE_PROJECT_NAME/src/REPLACE_PROJECT_NAME"]
+tests = ["tests", "*/REPLACE_PROJECT_NAME/tests"]
+
+[tool.coverage.report]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
