@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.12
 import argparse
 import shutil
+import subprocess
 from pathlib import Path
 
 
@@ -33,13 +34,15 @@ def main() -> None:
     args = parser.parse_args()
     project_name: str = args.project_name
     out_dir: Path = args.out_dir
+    dest = out_dir / project_name
 
     generate(
-        source=Path("template"),
-        dest=out_dir / project_name,
+        source=Path(__file__).parent / "template",
+        dest=dest,
         placeholder="REPLACE_PROJECT_NAME",
         value=project_name,
     )
+    subprocess.check_call(("code", str(dest)))
 
 
 if __name__ == "__main__":
