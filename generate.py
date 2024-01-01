@@ -42,7 +42,7 @@ def main() -> None:
         placeholder="REPLACE_PROJECT_NAME",
         value=project_name,
     )
-    subprocess.check_call(("code", str(dest)))
+    subprocess.check_call(("nvim", str(dest)))
 
 
 if __name__ == "__main__":
